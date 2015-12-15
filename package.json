@@ -1,0 +1,16 @@
+{
+  "name": "socket-demo",
+  "version": "1.0.0",
+  "description": "demo using socket.io",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "chanu1993",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.13.3",
+    "socket.io": "1.3.7",
+    "cors": "2.7.1"
+  }
+}

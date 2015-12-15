@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Automation</title>
+    <link href="style.css" rel="stylesheet">
+    <link href="lib/bootstrap.css" rel="stylesheet">
+</head>
+<body style="background-color: #333333">
+
+<div class="row">
+
+    <div class="col-lg-3">
+        <h4 style="color: white;">ROOM NO 1</h4>
+
+        <div id="light-bulb" class="off ui-draggable">
+            <div id="light-bulb2" style="opacity: 0; "></div>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <h4 style="color: white;">ROOM NO 2</h4>
+
+        <div id="light-bulb" class="off ui-draggable">
+            <div id="light-bulb3" style="opacity: 0; "></div>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <h4 style="color: white;">ROOM NO 3</h4>
+
+        <div id="light-bulb" class="off ui-draggable">
+            <div id="light-bulb4" style="opacity: 0; "></div>
+        </div>
+    </div>
+    <div class="col-lg-2">
+        <h4 style="color: white;">SECURITY ALARM</h4>
+
+        <div class="row">
+            <div class="col-lg-7">
+                <div style="visibility: hidden" id="redLed" class="led-red pull-right"></div>
+                <div id="greenLed" class="led-green pull-left"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<audio id="myAudio" loop>
+    <source src="siren.mp3" type="audio/ogg">
+    <source src="siren.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>
+
+<script src="https://code.jquery.com/jquery-2.1.4.min.js" type="text/javascript"></script>
+<script src="https://cdn.socket.io/socket.io-1.3.7.js"></script>
+<script src="playSound.js" type="text/javascript"></script>
+<script>
+
+    var x = document.getElementById("myAudio");
+
+    var socket = io.connect('http://localhost:8080');
+    socket.on('light1', function (data) {
+        if (data.light == "1") {
+            if (data.status == "on") {
+                $('#light-bulb2').css({'opacity': '1'});
+            } else {
+                $('#light-bulb2').css({'opacity': '0'});
+            }
+        } else if (data.light == "2") {
+            if (data.status == "on") {
+                $('#light-bulb3').css({'opacity': '1'});
+            } else {
+                $('#light-bulb3').css({'opacity': '0'});
+            }
+        } else if (data.light == "3") {
+            if (data.status == "on") {
+                $('#light-bulb4').css({'opacity': '1'});
+            } else {
+                $('#light-bulb4').css({'opacity': '0'});
+            }
+        } else if (data.light == "4") {
+            if (data.status == "on") {
+                x.play();
+                document.getElementById("redLed").style.visibility = "visible";
+                document.getElementById("greenLed").style.visibility = "hidden";
+            } else {
+                x.pause();
+                document.getElementById("redLed").style.visibility = "hidden";
+                document.getElementById("greenLed").style.visibility = "visible";
+            }
+        }
+    });
+</script>
+
+<script src="lib/bootstrap.js"></script>
+</body>
+</html>

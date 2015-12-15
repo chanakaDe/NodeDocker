@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html ng-app>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Mint Lights - Admin</title>
+    <link href="adminStyle.css" rel="stylesheet">
+</head>
+<body ng-controller="AdminController">
+
+<span ng-click="getBtnValue()" class="toggle">
+    <input ng-model="firstBtn" type="checkbox">
+    <label data-off="&#10006;" data-on="&#10004;"></label>
+</span>
+
+<span class="toggle">
+    <input type="checkbox">
+    <label data-off="&#9724;" data-on="&#9654;"></label>
+</span>
+
+<span class="toggle">
+    <input type="checkbox">
+    <label data-off="Stop" data-on="Play"></label>
+</span>
+
+<script src="lib/jquery-1.11.2.js"></script>
+<script src="lib/angular.min.js"></script>
+<script src="lib/angular-route.min.js"></script>
+
+<script>
+
+    function AdminController($scope) {
+
+        $scope.getBtnValue = function () {
+            console.log("Btn : ", $scope.firstBtn);
+        }
+
+    }
+
+</script>
+</body>
+</html>
